@@ -1,15 +1,27 @@
 <%
-    f = taglib('/lib/form')
+    f = taglib '/lib/form' 
+f.block do
+  f.entry :title => "Channel to notify", :field => :team_channel, :description => "Which channel to notify" do
+    f.textbox :clazz => 'required'
+  end
 
-    f.section :title => "Slack Notifier" do
-
-      f.block do
-        f.entry :channel => "Which channel to notify",
-          :field => :channel do
-            f.textbox :clazz => 'required'
-          end
-      end
-
+  f.optionalBlock :title => "Send start notification", :field => :send_start_notification, :inline => true do
+    f.entry :title => "Start message", :field => :start_message, :description => "The message to post when the build STARTS" do
+      f.textarea :clazz => 'required', :default => '${JOB_NAME} #${BUILD_NUMBER} START'
     end
+  end
+
+  f.optionalBlock :title => "Send success notifications", :field => :send_success_notification, :inline => true do
+    f.entry :title => "Success Message", :field => :success_message, :description => "The message to post when the build finishes with a state of SUCCESS" do
+      f.textarea :clazz => 'required', :default => '${JOB_NAME} #${BUILD_NUMBER} SUCCESS'
+    end
+  end
+
+  f.optionalBlock :title => "Send Failure notifications", :field => :send_failure_notifications, :inline => true do
+    f.entry :title => "Failure message", :field => :failure_message, :description => "The message to post when a build finishes with a status OTHER THAN SUCCESS" do
+        f.textarea :clazz => 'required', :default => '${JOB_NAME} #${BUILD_NUMBER} FAILURE'
+    end
+  end
+end
 
 %>
