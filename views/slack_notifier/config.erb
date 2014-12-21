@@ -1,0 +1,15 @@
+<%
+    f = taglib('/lib/form')
+
+    f.section :title => "Slack Notifier" do
+
+      f.block do
+        f.entry :channel => "Which channel to notify",
+          :field => :channel do
+            f.textbox :clazz => 'required'
+          end
+      end
+
+    end
+
+%>

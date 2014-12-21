@@ -1,0 +1,25 @@
+<%
+    f = taglib('/lib/form')
+
+    f.section :title => "Slack Notifier" do
+
+      f.block do
+        f.entry :title => "Bot Access Token",
+          :field => :slack_token,
+          :description => "See the slack API for the access token" do
+            f.textbox :clazz => 'required',
+              :default => "#{descriptor.slack_token}"
+          end
+      end
+
+      f.block do
+        f.entry :title => "Team domain",
+          :field => :slack_team,
+          :description => "team domain (first part of the domain you login to for slack.com)" do
+            f.textbox :clazz => 'required',
+              :default => "#{descriptor.slack_team}"
+          end
+      end
+    end
+
+%>
